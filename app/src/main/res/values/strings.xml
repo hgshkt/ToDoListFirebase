@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ToDoListFirebase</string>
+    <string name="descriptionHint">Task</string>
+    <string name="createButtonText">Create</string>
 </resources>
