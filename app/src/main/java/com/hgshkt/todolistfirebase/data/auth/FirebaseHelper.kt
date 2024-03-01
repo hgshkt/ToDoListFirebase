@@ -1,4 +1,4 @@
-package com.hgshkt.todolistfirebase.data
+package com.hgshkt.todolistfirebase.data.auth
 
 import android.content.Context
 import android.content.Intent

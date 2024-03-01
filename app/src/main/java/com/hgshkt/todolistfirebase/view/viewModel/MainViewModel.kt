@@ -6,11 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.common.api.ApiException
-import com.hgshkt.todolistfirebase.data.FirebaseHelper
+import com.hgshkt.todolistfirebase.data.auth.FirebaseHelper
+import com.hgshkt.todolistfirebase.data.repository.TaskRepository
+import com.hgshkt.todolistfirebase.data.repository.models.CreateTaskData
 
 class MainViewModel : ViewModel() {
 
     private val firebaseHelper: FirebaseHelper = FirebaseHelper()
+    private val repository: TaskRepository? = null
 
     private val _uiState = MutableLiveData<UIState>(UIState.LoginScreen)
     val uiState: LiveData<UIState> = _uiState
@@ -40,6 +43,13 @@ class MainViewModel : ViewModel() {
             afterSignIn = afterSignIn,
             errorHandling = { e -> errorHandling(e) }
         )
+    }
+
+    fun createTask(description: String) {
+        val data = CreateTaskData(
+            description = description
+        )
+        repository!!.create(data)
     }
 
     sealed class UIState {
