@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), OnAuthActivity {
         val createTaskFragment = CreateTaskFragment()
 
         supportFragmentManager.beginTransaction()
-            .add(createTaskFragment, CreateTaskFragment::class.java.name)
+            .replace(R.id.fragmentContainer, createTaskFragment)
             .addToBackStack(CreateTaskFragment::class.java.name)
             .commit()
     }
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), OnAuthActivity {
         val taskListFragment = TaskListFragment()
 
         supportFragmentManager.beginTransaction()
-            .add(taskListFragment, TaskListFragment::class.java.name)
+            .replace(R.id.fragmentContainer, taskListFragment)
             .commit()
     }
 
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), OnAuthActivity {
         val splashFragment = SplashFragment()
 
         supportFragmentManager.beginTransaction()
-            .add(splashFragment, SplashFragment::class.java.name)
+            .replace(R.id.fragmentContainer, splashFragment)
             .commit()
     }
 

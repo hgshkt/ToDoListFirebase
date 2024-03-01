@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hgshkt.todolistfirebase.R
+import com.hgshkt.todolistfirebase.view.fragments.create.CreateTaskFragment
 import com.hgshkt.todolistfirebase.view.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,6 +46,15 @@ class TaskListFragment : Fragment() {
                 else -> {}
             }
         }
+        addButton.setOnClickListener {
+            val createTaskFragment = CreateTaskFragment()
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, createTaskFragment)
+                .addToBackStack(CreateTaskFragment::class.java.name)
+                .commit()
+        }
+        viewModel.fetchTasks()
     }
 
     private fun updateUiToFilled() {
