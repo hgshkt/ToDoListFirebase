@@ -37,8 +37,8 @@ class FirebaseAuthHelper {
     ) {
         val googleTask = GoogleSignIn.getSignedInAccountFromIntent(data)
         try {
-            val result = googleTask.getResult(ApiException::class.java)
-            val credential = GoogleAuthProvider.getCredential(result.idToken, null)
+            account = googleTask.getResult(ApiException::class.java)
+            val credential = GoogleAuthProvider.getCredential(account!!.idToken, null)
             val auth = FirebaseAuth.getInstance()
             auth.signInWithCredential(credential)
             afterSignIn()
