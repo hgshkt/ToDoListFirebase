@@ -6,4 +6,6 @@ interface TaskStorage {
     fun create(task: TaskDB)
 
     suspend fun getTasks(): List<TaskDB>
+
+    fun delete(task: TaskDB)
 }

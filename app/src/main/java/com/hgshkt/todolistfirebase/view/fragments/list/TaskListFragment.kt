@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -55,6 +56,7 @@ class TaskListFragment : Fragment() {
                 .addToBackStack(CreateTaskFragment::class.java.name)
                 .commit()
         }
+
         viewModel.fetchTasks()
     }
 
@@ -65,6 +67,26 @@ class TaskListFragment : Fragment() {
 
         recyclerView.adapter = TaskListAdapter(tasks)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int = makeMovementFlags(0, ItemTouchHelper.END)
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                if (direction == ItemTouchHelper.END) {
+                    viewModel.delete(tasks[viewHolder.adapterPosition])
+                }
+            }
+        })
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     private fun updateUiToLoading() {

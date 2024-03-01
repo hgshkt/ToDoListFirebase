@@ -1,5 +1,6 @@
 package com.hgshkt.todolistfirebase.data.repository
 
+import com.hgshkt.todolistfirebase.data.mapper.toDB
 import com.hgshkt.todolistfirebase.data.mapper.toDisplay
 import com.hgshkt.todolistfirebase.data.repository.dataGenerator.IdGenerator
 import com.hgshkt.todolistfirebase.data.repository.models.CreateTaskData
@@ -21,5 +22,9 @@ class TaskRepositoryImpl(
 
     override suspend fun getTasks(): List<TaskDisplay> {
         return storage.getTasks().map { it.toDisplay() }
+    }
+
+    override fun delete(task: TaskDisplay) {
+        storage.delete(task.toDB())
     }
 }

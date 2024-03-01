@@ -58,6 +58,10 @@ class MainViewModel @Inject constructor(
         repository.create(data)
     }
 
+    fun delete(task: TaskDisplay) {
+        repository.delete(task)
+    }
+
     fun fetchTasks() {
         viewModelScope.launch {
             val tasks = repository.getTasks()

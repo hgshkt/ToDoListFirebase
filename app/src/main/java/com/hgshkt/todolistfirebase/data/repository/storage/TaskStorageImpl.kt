@@ -43,4 +43,12 @@ class TaskStorageImpl(
 
         return tasks
     }
+
+    override fun delete(task: TaskDB) {
+        database.reference
+            .child(firebaseAuthHelper.account?.id ?: defaultUserId)
+            .child(tasksDatabaseKey)
+            .child(task.id)
+            .removeValue()
+    }
 }

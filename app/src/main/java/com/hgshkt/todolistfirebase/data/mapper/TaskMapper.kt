@@ -7,3 +7,8 @@ fun TaskDB.toDisplay(): TaskDisplay = TaskDisplay(
     id = id,
     description = description
 )
+
+fun TaskDisplay.toDB(): TaskDB = TaskDB(
+    id = id,
+    description = description
+)
