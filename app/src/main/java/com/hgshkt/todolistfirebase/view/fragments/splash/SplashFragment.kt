@@ -1,4 +1,4 @@
-package com.hgshkt.todolistfirebase.view.fragments
+package com.hgshkt.todolistfirebase.view.fragments.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater
