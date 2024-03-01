@@ -1,6 +1,5 @@
 package com.hgshkt.todolistfirebase.view.fragments.list
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,12 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hgshkt.todolistfirebase.R
 import com.hgshkt.todolistfirebase.view.fragments.create.CreateTaskFragment
+import com.hgshkt.todolistfirebase.view.model.TaskDisplay
 import com.hgshkt.todolistfirebase.view.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +43,7 @@ class TaskListFragment : Fragment() {
         viewModel.uiState.observeForever {
             when (it) {
                 is MainViewModel.UIState.LoadingTaskList -> updateUiToLoading()
-                is MainViewModel.UIState.FilledList -> updateUiToFilled()
+                is MainViewModel.UIState.FilledList -> updateUiToFilled(it.tasks)
                 else -> {}
             }
         }
@@ -57,10 +58,13 @@ class TaskListFragment : Fragment() {
         viewModel.fetchTasks()
     }
 
-    private fun updateUiToFilled() {
+    private fun updateUiToFilled(tasks: List<TaskDisplay>) {
         progressBar.visibility = INVISIBLE
         recyclerView.visibility = VISIBLE
         addButton.visibility = VISIBLE
+
+        recyclerView.adapter = TaskListAdapter(tasks)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun updateUiToLoading() {

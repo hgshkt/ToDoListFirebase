@@ -9,7 +9,7 @@ import com.hgshkt.todolistfirebase.R
 import com.hgshkt.todolistfirebase.view.model.TaskDisplay
 
 class TaskListAdapter(
-    private val list: MutableList<TaskDisplay>
+    private val list: List<TaskDisplay>
 ): RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     override fun onCreateViewHolder(
