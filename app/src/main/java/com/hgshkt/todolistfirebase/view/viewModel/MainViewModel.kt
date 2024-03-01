@@ -5,11 +5,14 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.android.gms.common.api.ApiException
 import com.hgshkt.todolistfirebase.data.auth.FirebaseAuthHelper
 import com.hgshkt.todolistfirebase.data.repository.TaskRepository
 import com.hgshkt.todolistfirebase.data.repository.models.CreateTaskData
+import com.hgshkt.todolistfirebase.view.model.TaskDisplay
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -55,10 +58,19 @@ class MainViewModel @Inject constructor(
         repository.create(data)
     }
 
+    fun fetchTasks() {
+        viewModelScope.launch {
+            val tasks = repository.getTasks()
+            _uiState.postValue(UIState.FilledList(tasks))
+        }
+    }
+
     sealed class UIState {
         data object LoginScreen : UIState()
 
-        data object ToDoListScreen : UIState()
+        data object LoadingTaskList : UIState()
+
+        data class FilledList(val tasks: List<TaskDisplay>) : UIState()
 
         data object CreateTaskScreen : UIState()
     }

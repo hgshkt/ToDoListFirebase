@@ -25,8 +25,9 @@ class MainActivity : AppCompatActivity(), OnAuthActivity {
         viewModel.uiState.observeForever { state ->
             when (state) {
                 is MainViewModel.UIState.LoginScreen -> updateUiToLoginScreen()
-                is MainViewModel.UIState.ToDoListScreen -> updateUiToListScreen()
+                is MainViewModel.UIState.LoadingTaskList -> updateUiToListScreen()
                 is MainViewModel.UIState.CreateTaskScreen -> updateUiToCreateTaskScreen()
+                is MainViewModel.UIState.FilledList -> {}
             }
         }
         viewModel.updateUiStateByUserLogging(applicationContext)
