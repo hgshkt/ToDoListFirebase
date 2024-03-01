@@ -10,11 +10,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object MainModule {
     @Provides
+    @Singleton
     fun provideTaskRepositoryImpl(
         storage: TaskStorage,
         idGenerator: IdGenerator
@@ -26,11 +28,13 @@ object MainModule {
     }
 
     @Provides
+    @Singleton
     fun provideIdGeneratorImpl(): IdGeneratorImpl {
         return IdGeneratorImpl()
     }
 
     @Provides
+    @Singleton
     fun provideTaskStorageImpl(
         firebaseAuthHelper: FirebaseAuthHelper
     ): TaskStorageImpl {
@@ -38,6 +42,7 @@ object MainModule {
     }
 
     @Provides
+    @Singleton
     fun provideFirebaseAuthHelper(): FirebaseAuthHelper{
         return FirebaseAuthHelper()
     }
