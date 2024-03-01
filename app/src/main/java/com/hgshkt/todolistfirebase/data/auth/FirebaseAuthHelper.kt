@@ -13,6 +13,8 @@ class FirebaseAuthHelper {
 
     var account: GoogleSignInAccount? = null
 
+    private val clientId = "716224848849-gk083su0e1r6hkit91g5d2a3vemnajqd.apps.googleusercontent.com"
+
     fun getLastSignedInAccount(context: Context): GoogleSignInAccount? {
         account = GoogleSignIn.getLastSignedInAccount(context)
         return account
@@ -20,6 +22,7 @@ class FirebaseAuthHelper {
 
     fun createSignInIntent(context: Context): Intent {
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(clientId)
             .requestEmail()
             .build()
         val googleSignInClient = GoogleSignIn.getClient(context, googleSignInOptions)
