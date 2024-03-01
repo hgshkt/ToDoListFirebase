@@ -30,7 +30,7 @@ class MainViewModel @Inject constructor(
         if (account == null) {
             _uiState.postValue(UIState.LoginScreen)
         } else {
-            _uiState.postValue(UIState.ToDoListScreen)
+            _uiState.postValue(UIState.LoadingTaskList)
         }
     }
 

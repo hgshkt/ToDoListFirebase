@@ -1,12 +1,17 @@
 package com.hgshkt.todolistfirebase.view.fragments.list
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hgshkt.todolistfirebase.R
 import com.hgshkt.todolistfirebase.view.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,6 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class TaskListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var addButton: FloatingActionButton
+    private lateinit var progressBar: ProgressBar
+
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -40,14 +48,20 @@ class TaskListFragment : Fragment() {
     }
 
     private fun updateUiToFilled() {
-        TODO("Not yet implemented")
+        progressBar.visibility = INVISIBLE
+        recyclerView.visibility = VISIBLE
+        addButton.visibility = VISIBLE
     }
 
     private fun updateUiToLoading() {
-        TODO("Not yet implemented")
+        progressBar.visibility = VISIBLE
+        recyclerView.visibility = INVISIBLE
+        addButton.visibility = INVISIBLE
     }
 
     private fun init(view: View) {
         recyclerView = view.findViewById(R.id.taskListRecyclerView)
+        addButton = view.findViewById(R.id.taskListFragmentAddButton)
+        progressBar = view.findViewById(R.id.progressBar)
     }
 }
