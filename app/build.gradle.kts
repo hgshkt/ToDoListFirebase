@@ -52,6 +52,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.4.0")
     implementation("com.google.firebase:firebase-database-ktx:20.3.1")
 
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+
     // Hilt
     implementation("com.google.dagger:hilt-android:2.46.1")
     kapt("com.google.dagger:hilt-compiler:2.46.1")
