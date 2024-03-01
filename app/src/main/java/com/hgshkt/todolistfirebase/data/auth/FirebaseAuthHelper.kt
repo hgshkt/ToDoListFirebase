@@ -9,10 +9,13 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
-class FirebaseHelper {
+class FirebaseAuthHelper {
+
+    var account: GoogleSignInAccount? = null
 
     fun getLastSignedInAccount(context: Context): GoogleSignInAccount? {
-        return GoogleSignIn.getLastSignedInAccount(context)
+        account = GoogleSignIn.getLastSignedInAccount(context)
+        return account
     }
 
     fun createSignInIntent(context: Context): Intent {
