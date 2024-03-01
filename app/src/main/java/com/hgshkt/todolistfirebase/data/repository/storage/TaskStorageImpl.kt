@@ -3,6 +3,7 @@ package com.hgshkt.todolistfirebase.data.repository.storage
 import com.google.firebase.database.FirebaseDatabase
 import com.hgshkt.todolistfirebase.data.auth.FirebaseAuthHelper
 import com.hgshkt.todolistfirebase.data.repository.storage.model.TaskDB
+import kotlinx.coroutines.tasks.await
 
 class TaskStorageImpl(
     private val firebaseAuthHelper: FirebaseAuthHelper
@@ -20,5 +21,26 @@ class TaskStorageImpl(
             .child(tasksDatabaseKey)
             .child(task.id)
             .setValue(task.description)
+    }
+
+    override suspend fun getTasks(): List<TaskDB> {
+        val tasks = mutableListOf<TaskDB>()
+
+        database.reference
+            .child(firebaseAuthHelper.account?.id ?: defaultUserId)
+            .child(tasksDatabaseKey)
+
+            .get()
+            .await()
+            .children
+
+            .forEach {
+                val description = it.getValue(String::class.java)
+                tasks.add(
+                    TaskDB(it.key!!, description!!)
+                )
+            }
+
+        return tasks
     }
 }
