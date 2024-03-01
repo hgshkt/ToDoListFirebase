@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), OnAuthActivity {
                 is MainViewModel.UIState.LoginScreen -> updateUiToLoginScreen()
                 is MainViewModel.UIState.LoadingTaskList -> updateUiToListScreen()
                 is MainViewModel.UIState.CreateTaskScreen -> updateUiToCreateTaskScreen()
-                is MainViewModel.UIState.FilledList -> {}
+                else -> {}
             }
         }
         viewModel.updateUiStateByUserLogging(applicationContext)

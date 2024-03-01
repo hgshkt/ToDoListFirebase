@@ -36,6 +36,7 @@ class MainViewModel @Inject constructor(
 
     fun signInButtonClick(context: Context, buttonClick: (Intent) -> Unit) {
         val intent = firebaseAuthHelper.createSignInIntent(context)
+        _uiState.postValue(UIState.LoadingLoginScreen)
         buttonClick(intent)
     }
 
@@ -71,6 +72,8 @@ class MainViewModel @Inject constructor(
 
     sealed class UIState {
         data object LoginScreen : UIState()
+
+        data object LoadingLoginScreen : UIState()
 
         data object LoadingTaskList : UIState()
 
