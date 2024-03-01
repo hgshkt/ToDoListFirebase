@@ -5,9 +5,11 @@ import com.hgshkt.todolistfirebase.data.auth.FirebaseAuthHelper
 import com.hgshkt.todolistfirebase.data.repository.storage.model.TaskDB
 
 class TaskStorageImpl(
-    private val firebaseAuthHelper: FirebaseAuthHelper,
-    private val database: FirebaseDatabase
+    private val firebaseAuthHelper: FirebaseAuthHelper
 ): TaskStorage {
+
+    private val dbPath = "https://todolistfirebase-fd7bc-default-rtdb.europe-west1.firebasedatabase.app/"
+    private val database: FirebaseDatabase = FirebaseDatabase.getInstance(dbPath)
 
     private val defaultUserId = "unknown_user_id"
     private val tasksDatabaseKey = "tasks"
