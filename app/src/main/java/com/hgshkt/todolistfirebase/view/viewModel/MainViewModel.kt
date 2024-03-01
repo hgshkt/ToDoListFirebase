@@ -9,11 +9,14 @@ import com.google.android.gms.common.api.ApiException
 import com.hgshkt.todolistfirebase.data.auth.FirebaseAuthHelper
 import com.hgshkt.todolistfirebase.data.repository.TaskRepository
 import com.hgshkt.todolistfirebase.data.repository.models.CreateTaskData
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
-
-    private val firebaseAuthHelper: FirebaseAuthHelper = FirebaseAuthHelper()
-    private val repository: TaskRepository? = null
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val firebaseAuthHelper: FirebaseAuthHelper,
+    private val repository: TaskRepository
+) : ViewModel() {
 
     private val _uiState = MutableLiveData<UIState>(UIState.LoginScreen)
     val uiState: LiveData<UIState> = _uiState
@@ -49,7 +52,7 @@ class MainViewModel : ViewModel() {
         val data = CreateTaskData(
             description = description
         )
-        repository!!.create(data)
+        repository.create(data)
     }
 
     sealed class UIState {
