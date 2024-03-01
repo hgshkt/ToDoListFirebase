@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.api.ApiException
+import com.hgshkt.todolistfirebase.view.fragments.create.CreateTaskFragment
+import com.hgshkt.todolistfirebase.view.fragments.list.TaskListFragment
+import com.hgshkt.todolistfirebase.view.fragments.splash.SplashFragment
 import com.hgshkt.todolistfirebase.view.viewModel.MainViewModel
 
 class MainActivity : AppCompatActivity(), OnAuthActivity {
@@ -26,15 +29,28 @@ class MainActivity : AppCompatActivity(), OnAuthActivity {
     }
 
     private fun updateUiToCreateTaskScreen() {
-        TODO("Not yet implemented")
+        val createTaskFragment = CreateTaskFragment()
+
+        supportFragmentManager.beginTransaction()
+            .add(createTaskFragment, CreateTaskFragment::class.java.name)
+            .addToBackStack(CreateTaskFragment::class.java.name)
+            .commit()
     }
 
     private fun updateUiToListScreen() {
-        TODO("Not yet implemented")
+        val taskListFragment = TaskListFragment()
+
+        supportFragmentManager.beginTransaction()
+            .add(taskListFragment, TaskListFragment::class.java.name)
+            .commit()
     }
 
     private fun updateUiToLoginScreen() {
-        TODO("Not yet implemented")
+        val splashFragment = SplashFragment()
+
+        supportFragmentManager.beginTransaction()
+            .add(splashFragment, SplashFragment::class.java.name)
+            .commit()
     }
 
     override fun launch(intent: Intent) {
