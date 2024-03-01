@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), OnAuthActivity {
                 is MainViewModel.UIState.CreateTaskScreen -> updateUiToCreateTaskScreen()
             }
         }
+        viewModel.updateUiStateByUserLogging(applicationContext)
     }
 
     private fun updateUiToCreateTaskScreen() {
